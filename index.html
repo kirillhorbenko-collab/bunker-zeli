@@ -1,108 +1,689 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>🇺🇦 Бункер Зели — Developer Tools</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бункер Зели // UA EDITION</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#080c14;color:#f5f7ff;font-family:Arial,sans-serif}main{max-width:1050px;margin:auto;padding:36px 18px}.hero,.card{background:#111827;border:1px solid #273650;border-radius:18px}.hero{padding:30px}.badge{display:inline-block;background:#2369eb;padding:7px 12px;border-radius:999px;font-weight:700;font-size:12px}h1{font-size:42px;margin:18px 0 8px}.muted{color:#97a3b8}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:22px 0}.card{padding:18px}.card h3{margin:0 0 8px}.card p{margin:0;color:#97a3b8}.code{margin-top:18px}.code pre{margin:0;background:#060910;border:1px solid #273650;border-radius:14px;padding:18px;overflow:auto;max-height:560px;white-space:pre;color:#dfe8fa;font-size:13px;line-height:1.5}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}button{border:0;border-radius:10px;padding:12px 17px;font-weight:700;cursor:pointer}.primary{background:#2369eb;color:#fff}.secondary{background:#273650;color:#fff}footer{text-align:center;color:#647189;padding:25px}.ok{margin-top:10px;color:#77e0a3;min-height:20px}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #080b12;
+    color: #f5f7ff;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: min(1100px, 92%);
+    margin: 40px auto;
+}
+
+.header {
+    background: #101522;
+    border: 1px solid #234fa8;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 0 30px rgba(35,105,235,.15);
+}
+
+h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.subtitle {
+    color: #8d98ad;
+    margin-top: 8px;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    border: 0;
+    border-radius: 10px;
+    padding: 13px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+}
+
+.copy {
+    background: #2369eb;
+}
+
+.download {
+    background: #e5b92f;
+    color: #111;
+}
+
+button:hover {
+    opacity: .85;
+}
+
+.status {
+    margin-top: 12px;
+    color: #65ff96;
+    min-height: 20px;
+}
+
+.code-box {
+    margin-top: 20px;
+    background: #0d111b;
+    border: 1px solid #27344e;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.code-header {
+    background: #141b2a;
+    padding: 12px 16px;
+    color: #8d98ad;
+    font-size: 13px;
+}
+
+pre {
+    margin: 0;
+    padding: 20px;
+    overflow: auto;
+    max-height: 650px;
+    white-space: pre;
+}
+
+code {
+    color: #dce4f5;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+}
 </style>
 </head>
+
 <body>
-<main>
-<section class="hero">
-<span class="badge">UA EDITION</span>
-<h1>🇺🇦 Бункер Зели</h1>
-<div class="muted">Developer Console для собственной Roblox Studio игры</div>
-<div class="grid">
-<div class="card"><h3>FPS Monitor</h3><p>Показывает текущее количество кадров.</p></div>
-<div class="card"><h3>FOV Debug</h3><p>Визуальный индикатор центра и радиуса FOV.</p></div>
-<div class="card"><h3>Player Debug</h3><p>Отладочные визуальные элементы для своей игры.</p></div>
-<div class="card"><h3>Settings</h3><p>Простая настройка developer-инструментов.</p></div>
-</div>
-<div class="card code">
-<h3>Developer LocalScript</h3>
-<p class="muted">StarterPlayer → StarterPlayerScripts</p>
-<pre id="scriptCode">--========================================================
+
+<div class="container">
+
+    <div class="header">
+        <h1>🇺🇦 Бункер Зели // UA EDITION</h1>
+
+        <div class="subtitle">
+            Roblox Studio Developer Script
+        </div>
+
+        <div class="buttons">
+            <button class="copy" onclick="copyScript()">
+                COPY SCRIPT
+            </button>
+
+            <button class="download" onclick="downloadLua()">
+                DOWNLOAD .LUA
+            </button>
+        </div>
+
+        <div class="status" id="status"></div>
+    </div>
+
+    <div class="code-box">
+
+        <div class="code-header">
+            NEON_X_UA.lua
+        </div>
+
+        <pre><code id="script">--========================================================
 -- 🇺🇦 Бункер Зели // UA EDITION
--- DEVELOPER TOOLS
--- Для собственной Roblox Studio игры
+-- ESP + AIM + FOV + KEYBIND + VISUALS + FPS
+-- LocalScript -> StarterPlayer > StarterPlayerScripts
 --========================================================
 
 local Players = game:GetService("Players")
+local UIS = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
 local LP = Players.LocalPlayer
 local PlayerGui = LP:WaitForChild("PlayerGui")
 
-local oldGui = PlayerGui:FindFirstChild("BunkerZeliDeveloper")
+--========================================================
+-- CLEAN OLD VERSION
+--========================================================
+
+local oldGui = PlayerGui:FindFirstChild("NeonX_UA")
+
 if oldGui then
     oldGui:Destroy()
 end
 
-local gui = Instance.new("ScreenGui")
-gui.Name = "BunkerZeliDeveloper"
-gui.ResetOnSpawn = false
-gui.IgnoreGuiInset = true
-gui.Parent = PlayerGui
-
-local frame = Instance.new("Frame")
-frame.Size = UDim2.fromOffset(245, 88)
-frame.Position = UDim2.new(1, -265, 0, 20)
-frame.BackgroundColor3 = Color3.fromRGB(15, 20, 32)
-frame.BorderSizePixel = 0
-frame.Parent = gui
-
-local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 12)
-corner.Parent = frame
-
-local stroke = Instance.new("UIStroke")
-stroke.Color = Color3.fromRGB(35, 105, 235)
-stroke.Transparency = 0.25
-stroke.Parent = frame
-
-local label = Instance.new("TextLabel")
-label.Size = UDim2.new(1, -20, 1, -10)
-label.Position = UDim2.fromOffset(10, 5)
-label.BackgroundTransparency = 1
-label.TextColor3 = Color3.fromRGB(245, 247, 255)
-label.Font = Enum.Font.GothamBold
-label.TextSize = 14
-label.TextXAlignment = Enum.TextXAlignment.Left
-label.TextYAlignment = Enum.TextYAlignment.Center
-label.Text = "🇺🇦 Бункер Зели\nFPS: 60\nDeveloper Mode"
-label.Parent = frame
-
-local frames = 0
-local elapsed = 0
-
-RunService.RenderStepped:Connect(function(dt)
-    frames += 1
-    elapsed += dt
-
-    if elapsed >= 0.5 then
-        local fps = math.floor(frames / elapsed + 0.5)
-        label.Text = "🇺🇦 Бункер Зели\nFPS: " .. fps .. "\nDeveloper Mode"
-        frames = 0
-        elapsed = 0
-    end
+pcall(function()
+    RunService:UnbindFromRenderStep("NEON_X_AIM")
 end)
 
-print("🇺🇦 Бункер Зели // Developer Tools loaded")</pre>
-<div class="actions">
-<button class="primary" onclick="copyScript()">📋 COPY SCRIPT</button>
-<button class="secondary" onclick="downloadLua()">⬇ DOWNLOAD .LUA</button>
+--========================================================
+-- COLORS
+--========================================================
+
+local BLUE = Color3.fromRGB(35, 105, 235)
+local BLUE_DARK = Color3.fromRGB(18, 35, 70)
+local YELLOW = Color3.fromRGB(255, 205, 55)
+local BG = Color3.fromRGB(9, 12, 20)
+local PANEL = Color3.fromRGB(15, 20, 32)
+local CARD = Color3.fromRGB(20, 26, 40)
+local HOVER = Color3.fromRGB(28, 36, 55)
+local TEXT = Color3.fromRGB(245, 247, 255)
+local MUTED = Color3.fromRGB(135, 145, 165)
+
+--========================================================
+-- SETTINGS
+--========================================================
+
+local ESP_ENABLED = false
+local AIM_ENABLED = false
+local FOV_ENABLED = true
+
+local AIM_FOV = 220
+local AIM_SMOOTH = 0.16
+local AIM_KEY = Enum.KeyCode.Q
+
+local HEAD_DOT = false
+local HEAD_RING = false
+local PLAYER_NAME = false
+local DISTANCE_TEXT = false
+local TRACERS = false
+local FPS_ENABLED = true
+
+local waitingForAimKey = false
+
+--========================================================
+-- GUI
+--========================================================
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "NeonX_UA"
+gui.ResetOnSpawn = false
+gui.IgnoreGuiInset = true
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Parent = PlayerGui
+
+--========================================================
+-- FPS DISPLAY
+--========================================================
+
+local fpsFrame = Instance.new("Frame")
+fpsFrame.Name = "FPS"
+fpsFrame.Size = UDim2.fromOffset(125, 38)
+fpsFrame.Position = UDim2.new(1, -145, 0, 18)
+fpsFrame.BackgroundColor3 = PANEL
+fpsFrame.BorderSizePixel = 0
+fpsFrame.ZIndex = 100
+fpsFrame.Parent = gui
+
+local fpsText = Instance.new("TextLabel")
+fpsText.Size = UDim2.fromScale(1, 1)
+fpsText.BackgroundTransparency = 1
+fpsText.Text = "FPS  60"
+fpsText.TextColor3 = TEXT
+fpsText.Font = Enum.Font.GothamBold
+fpsText.TextSize = 13
+fpsText.Parent = fpsFrame
+
+local frames = 0
+local fpsTimer = 0
+
+--========================================================
+-- MAIN WINDOW
+--========================================================
+
+local main = Instance.new("Frame")
+main.Name = "Main"
+main.Size = UDim2.fromOffset(850, 525)
+main.Position = UDim2.new(0.5, -425, 0.5, -262)
+main.BackgroundColor3 = BG
+main.BorderSizePixel = 0
+main.Active = true
+main.Parent = gui
+
+local title = Instance.new("TextLabel")
+title.Position = UDim2.fromOffset(25, 20)
+title.Size = UDim2.fromOffset(500, 40)
+title.BackgroundTransparency = 1
+title.Text = "🇺🇦 Бункер Зели"
+title.TextColor3 = TEXT
+title.Font = Enum.Font.GothamBlack
+title.TextSize = 25
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Parent = main
+
+local info = Instance.new("TextLabel")
+info.Position = UDim2.fromOffset(27, 62)
+info.Size = UDim2.fromOffset(500, 25)
+info.BackgroundTransparency = 1
+info.Text = "DEVELOPER CONSOLE • Z TO TOGGLE"
+info.TextColor3 = MUTED
+info.Font = Enum.Font.Gotham
+info.TextSize = 11
+info.TextXAlignment = Enum.TextXAlignment.Left
+info.Parent = main
+
+--========================================================
+-- SIMPLE MENU
+--========================================================
+
+local function makeButton(text, y)
+    local button = Instance.new("TextButton")
+
+    button.Size = UDim2.fromOffset(200, 50)
+    button.Position = UDim2.fromOffset(25, y)
+
+    button.BackgroundColor3 = PANEL
+    button.BorderSizePixel = 0
+
+    button.Text = text
+    button.TextColor3 = TEXT
+    button.Font = Enum.Font.GothamBold
+    button.TextSize = 13
+
+    button.Parent = main
+
+    return button
+end
+
+local espButton = makeButton("ESP: OFF", 120)
+local aimButton = makeButton("AIM ASSIST: OFF", 180)
+local fovButton = makeButton("FOV: ON", 240)
+local fpsButton = makeButton("FPS: ON", 300)
+
+--========================================================
+-- FOV
+--========================================================
+
+local fov = Instance.new("Frame")
+
+fov.AnchorPoint = Vector2.new(0.5, 0.5)
+fov.Position = UDim2.fromScale(0.5, 0.5)
+fov.Size = UDim2.fromOffset(440, 440)
+
+fov.BackgroundTransparency = 1
+fov.Visible = true
+fov.Parent = gui
+
+local stroke = Instance.new("UIStroke")
+stroke.Color = BLUE
+stroke.Thickness = 2
+stroke.Parent = fov
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(1, 0)
+corner.Parent = fov
+
+--========================================================
+-- ESP
+--========================================================
+
+local espObjects = {}
+
+local function removeESP(player)
+
+    if espObjects[player] then
+        espObjects[player]:Destroy()
+        espObjects[player] = nil
+    end
+
+end
+
+local function addESP(player)
+
+    if player == LP then
+        return
+    end
+
+    if not ESP_ENABLED then
+        return
+    end
+
+    local character = player.Character
+
+    if not character then
+        return
+    end
+
+    removeESP(player)
+
+    local highlight = Instance.new("Highlight")
+
+    highlight.Name = "NEON_ESP"
+    highlight.Adornee = character
+    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    highlight.FillColor = BLUE
+    highlight.OutlineColor = YELLOW
+    highlight.FillTransparency = 0.45
+    highlight.OutlineTransparency = 0
+
+    highlight.Parent = character
+
+    espObjects[player] = highlight
+end
+
+local function refreshESP()
+
+    for _, player in ipairs(Players:GetPlayers()) do
+
+        if player ~= LP then
+
+            if ESP_ENABLED then
+                addESP(player)
+            else
+                removeESP(player)
+            end
+
+        end
+
+    end
+
+end
+
+--========================================================
+-- AIM TARGET
+--========================================================
+
+local function getTarget()
+
+    local camera = workspace.CurrentCamera
+
+    if not camera then
+        return nil
+    end
+
+    local center = Vector2.new(
+        camera.ViewportSize.X / 2,
+        camera.ViewportSize.Y / 2
+    )
+
+    local bestTarget = nil
+    local bestDistance = 220
+
+    for _, player in ipairs(Players:GetPlayers()) do
+
+        if player ~= LP then
+
+            local character = player.Character
+
+            if character then
+
+                local humanoid =
+                    character:FindFirstChildOfClass("Humanoid")
+
+                local head =
+                    character:FindFirstChild("Head")
+
+                if humanoid and head and humanoid.Health > 0 then
+
+                    local position, visible =
+                        camera:WorldToViewportPoint(head.Position)
+
+                    if visible and position.Z > 0 then
+
+                        local point = Vector2.new(
+                            position.X,
+                            position.Y
+                        )
+
+                        local distance =
+                            (point - center).Magnitude
+
+                        if distance < bestDistance then
+
+                            bestDistance = distance
+                            bestTarget = head
+
+                        end
+
+                    end
+
+                end
+
+            end
+
+        end
+
+    end
+
+    return bestTarget
+end
+
+--========================================================
+-- AIM
+--========================================================
+
+RunService:BindToRenderStep(
+    "NEON_X_AIM",
+    Enum.RenderPriority.Camera.Value + 1,
+    function()
+
+        if not AIM_ENABLED then
+            return
+        end
+
+        local camera = workspace.CurrentCamera
+
+        if not camera then
+            return
+        end
+
+        local target = getTarget()
+
+        if target then
+
+            local look =
+                CFrame.lookAt(
+                    camera.CFrame.Position,
+                    target.Position
+                )
+
+            camera.CFrame =
+                camera.CFrame:Lerp(
+                    look,
+                    AIM_SMOOTH
+                )
+
+        end
+
+    end
+)
+
+--========================================================
+-- BUTTONS
+--========================================================
+
+espButton.MouseButton1Click:Connect(function()
+
+    ESP_ENABLED = not ESP_ENABLED
+
+    espButton.Text =
+        "ESP: " .. (ESP_ENABLED and "ON" or "OFF")
+
+    refreshESP()
+
+end)
+
+aimButton.MouseButton1Click:Connect(function()
+
+    AIM_ENABLED = not AIM_ENABLED
+
+    aimButton.Text =
+        "AIM ASSIST: " ..
+        (AIM_ENABLED and "ON" or "OFF")
+
+end)
+
+fovButton.MouseButton1Click:Connect(function()
+
+    FOV_ENABLED = not FOV_ENABLED
+
+    fov.Visible = FOV_ENABLED
+
+    fovButton.Text =
+        "FOV: " ..
+        (FOV_ENABLED and "ON" or "OFF")
+
+end)
+
+fpsButton.MouseButton1Click:Connect(function()
+
+    FPS_ENABLED = not FPS_ENABLED
+
+    fpsFrame.Visible = FPS_ENABLED
+
+    fpsButton.Text =
+        "FPS: " ..
+        (FPS_ENABLED and "ON" or "OFF")
+
+end)
+
+--========================================================
+-- Z TO TOGGLE MENU
+--========================================================
+
+UIS.InputBegan:Connect(function(input, processed)
+
+    if processed then
+        return
+    end
+
+    if input.KeyCode == Enum.KeyCode.Z then
+
+        main.Visible =
+            not main.Visible
+
+    end
+
+end)
+
+--========================================================
+-- FPS + FOV UPDATE
+--========================================================
+
+RunService.RenderStepped:Connect(function(dt)
+
+    if FPS_ENABLED then
+
+        frames += 1
+        fpsTimer += dt
+
+        if fpsTimer >= 0.5 then
+
+            local fps =
+                math.floor(
+                    frames / fpsTimer + 0.5
+                )
+
+            fpsText.Text =
+                "FPS  " .. fps
+
+            frames = 0
+            fpsTimer = 0
+
+        end
+
+    end
+
+    local camera =
+        workspace.CurrentCamera
+
+    if camera then
+
+        fov.Position =
+            UDim2.fromOffset(
+                camera.ViewportSize.X / 2,
+                camera.ViewportSize.Y / 2
+            )
+
+    end
+
+end)
+
+--========================================================
+-- PLAYER EVENTS
+--========================================================
+
+local function setupPlayer(player)
+
+    if player == LP then
+        return
+    end
+
+    player.CharacterAdded:Connect(function()
+
+        task.wait(0.3)
+
+        if ESP_ENABLED then
+            addESP(player)
+        end
+
+    end)
+
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+    setupPlayer(player)
+end
+
+Players.PlayerAdded:Connect(setupPlayer)
+
+Players.PlayerRemoving:Connect(function(player)
+
+    removeESP(player)
+
+end)
+
+print("================================")
+print("🇺🇦 Бункер Зели // UA EDITION")
+print("LOADED SUCCESSFULLY")
+print("================================")</code></pre>
+
+    </div>
 </div>
-<div id="status" class="ok"></div>
-</div>
-</section>
-<footer>🇺🇦 Бункер Зели • Developer edition</footer>
-</main>
+
 <script>
-const code=()=>document.getElementById('scriptCode').textContent;
-function copyScript(){navigator.clipboard.writeText(code()).then(()=>{document.getElementById('status').textContent='✅ Скрипт скопирован';setTimeout(()=>document.getElementById('status').textContent='',1800)}).catch(()=>{document.getElementById('status').textContent='❌ Не удалось скопировать'})}
-function downloadLua(){const blob=new Blob([code()],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='BunkerZeli_Developer.lua';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);document.getElementById('status').textContent='✅ .lua файл скачивается'}
+function getScript() {
+    return document.getElementById("script").textContent;
+}
+
+function copyScript() {
+    navigator.clipboard.writeText(getScript()).then(function() {
+        document.getElementById("status").textContent =
+            "✓ Script copied!";
+    });
+}
+
+function downloadLua() {
+    const blob = new Blob(
+        [getScript()],
+        { type: "text/plain;charset=utf-8" }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Bunker_Zeli.lua";
+
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    URL.revokeObjectURL(url);
+
+    document.getElementById("status").textContent =
+        "✓ Bunker_Zeli.lua downloaded!";
+}
 </script>
+
 </body>
 </html>
