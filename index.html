@@ -1,144 +1,418 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Бункер Зели // UA EDITION</title>
+<title>🇺🇦 Бункер Зели // UA EDITION</title>
 
 <style>
 * {
     box-sizing: border-box;
 }
 
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
 body {
-    margin: 0;
-    background: #080b12;
+    background:
+        radial-gradient(circle at top left, rgba(35,105,235,0.16), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255,205,55,0.08), transparent 30%),
+        #090c14;
     color: #f5f7ff;
-    font-family: Arial, sans-serif;
-}
-
-.container {
-    width: min(1100px, 92%);
-    margin: 40px auto;
-}
-
-.header {
-    background: #101522;
-    border: 1px solid #234fa8;
-    border-radius: 18px;
-    padding: 25px;
-    box-shadow: 0 0 30px rgba(35,105,235,.15);
-}
-
-h1 {
-    margin: 0;
-    font-size: 30px;
-}
-
-.subtitle {
-    color: #8d98ad;
-    margin-top: 8px;
-}
-
-.buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-button {
-    border: 0;
-    border-radius: 10px;
-    padding: 13px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    color: white;
-    font-size: 14px;
-}
-
-.copy {
-    background: #2369eb;
-}
-
-.download {
-    background: #e5b92f;
-    color: #111;
-}
-
-button:hover {
-    opacity: .85;
-}
-
-.status {
-    margin-top: 12px;
-    color: #65ff96;
-    min-height: 20px;
-}
-
-.code-box {
-    margin-top: 20px;
-    background: #0d111b;
-    border: 1px solid #27344e;
-    border-radius: 15px;
+    font-family: Arial, Helvetica, sans-serif;
     overflow: hidden;
 }
 
-.code-header {
-    background: #141b2a;
-    padding: 12px 16px;
-    color: #8d98ad;
-    font-size: 13px;
+.app {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
-pre {
+.panel {
+    width: min(1400px, 100%);
+    height: min(900px, calc(100vh - 40px));
+    background: #090c14;
+    border: 1px solid rgba(35,105,235,0.45);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+        0 0 45px rgba(0,0,0,0.5),
+        0 0 30px rgba(35,105,235,0.08);
+}
+
+.header {
+    height: 88px;
+    min-height: 88px;
+    padding: 16px 22px;
+    position: relative;
+    background: #090c14;
+    border-bottom: 1px solid rgba(35,105,235,0.28);
+}
+
+.logo {
+    position: absolute;
+    left: 28px;
+    top: 12px;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+}
+
+.badge {
+    display: inline-flex;
+    margin-left: 12px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    background: #2369eb;
+    color: white;
+    font-size: 10px;
+    font-weight: 900;
+    vertical-align: middle;
+}
+
+.subtitle {
+    position: absolute;
+    left: 30px;
+    top: 45px;
+    color: #8791a5;
+    font-size: 11px;
+    letter-spacing: 0.3px;
+}
+
+.header-line {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 14px;
+    height: 2px;
+    background: #2369eb;
+}
+
+.header-line-yellow {
+    position: absolute;
+    left: 20px;
+    bottom: 14px;
+    width: 100px;
+    height: 2px;
+    background: #ffcd37;
+}
+
+.toolbar {
+    position: absolute;
+    right: 22px;
+    top: 18px;
+    display: flex;
+    gap: 8px;
+}
+
+.button {
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    border-radius: 9px;
+    padding: 10px 14px;
+    color: #ffffff;
+    background: #141a28;
+    font-weight: 800;
+    font-size: 11px;
+    transition: 0.15s ease;
+}
+
+.button:hover {
+    background: #1c2437;
+}
+
+.button.blue {
+    background: #2369eb;
+}
+
+.button.blue:hover {
+    background: #2d77ff;
+}
+
+.content {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    padding: 16px;
+    gap: 16px;
+}
+
+.sidebar {
+    width: 210px;
+    min-width: 210px;
+    background: #0f1420;
+    border: 1px solid rgba(40,50,70,0.6);
+    border-radius: 15px;
+    padding: 12px;
+}
+
+.sidebar-title {
+    padding: 4px 3px 10px;
+    color: #8791a5;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+.tab {
+    width: 100%;
+    height: 52px;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: #8791a5;
+    text-align: left;
+    padding-left: 16px;
+    margin-bottom: 6px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 800;
+    position: relative;
+    transition: 0.15s ease;
+}
+
+.tab:hover {
+    background: #1c2437;
+    color: #f5f7ff;
+}
+
+.tab.active {
+    background: #122346;
+    color: #f5f7ff;
+}
+
+.tab.active::before {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 26px;
+    left: 5px;
+    top: 13px;
+    background: #ffcd37;
+    border-radius: 3px;
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-header {
+    padding: 4px 10px 16px;
+}
+
+.page-title {
     margin: 0;
-    padding: 20px;
-    overflow: auto;
-    max-height: 650px;
+    color: #f5f7ff;
+    font-size: 23px;
+    font-weight: 900;
+}
+
+.page-description {
+    margin-top: 6px;
+    color: #8791a5;
+    font-size: 11px;
+}
+
+.editor-wrap {
+    flex: 1;
+    min-height: 0;
+    background: #0b0f18;
+    border: 1px solid #26334d;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-top {
+    height: 42px;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    background: #0f1420;
+    border-bottom: 1px solid #26334d;
+}
+
+.file-name {
+    color: #a7b1c3;
+    font-size: 12px;
+    font-family: Consolas, monospace;
+}
+
+.status {
+    color: #64dc96;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+textarea {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    border: 0;
+    outline: 0;
+    resize: none;
+    padding: 18px;
+    background: #090c14;
+    color: #dce4f5;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    tab-size: 4;
     white-space: pre;
 }
 
-code {
-    color: #dce4f5;
-    font-family: Consolas, monospace;
-    font-size: 13px;
-    line-height: 1.5;
+.footer {
+    padding-top: 10px;
+    color: #6f7a8f;
+    font-size: 10px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+    padding: 11px 16px;
+    border-radius: 10px;
+    background: #141a28;
+    border: 1px solid #33415d;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s ease;
+    z-index: 9999;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+@media (max-width: 850px) {
+    .sidebar {
+        width: 150px;
+        min-width: 150px;
+    }
+
+    .toolbar {
+        display: none;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="app">
 
-    <div class="header">
-        <h1>🇺🇦 Бункер Зели // UA EDITION</h1>
+    <div class="panel">
 
-        <div class="subtitle">
-            Roblox Studio Developer Script
+        <div class="header">
+
+            <div class="logo">
+                🇺🇦 Бункер Зели
+                <span class="badge">UA EDITION</span>
+            </div>
+
+            <div class="subtitle">
+                DEVELOPER CONSOLE • Z TO TOGGLE
+            </div>
+
+            <div class="toolbar">
+                <button class="button" onclick="copyScript()">
+                    COPY SCRIPT
+                </button>
+
+                <button class="button blue" onclick="downloadScript()">
+                    DOWNLOAD .LUA
+                </button>
+            </div>
+
+            <div class="header-line"></div>
+            <div class="header-line-yellow"></div>
+
         </div>
 
-        <div class="buttons">
-            <button class="copy" onclick="copyScript()">
-                COPY SCRIPT
-            </button>
+        <div class="content">
 
-            <button class="download" onclick="downloadLua()">
-                DOWNLOAD .LUA
-            </button>
-        </div>
+            <aside class="sidebar">
 
-        <div class="status" id="status"></div>
-    </div>
+                <div class="sidebar-title">
+                    CONTROL CENTER
+                </div>
 
-    <div class="code-box">
+                <button class="tab active" onclick="switchTab(this, 'esp')">
+                    ESP
+                </button>
 
-        <div class="code-header">
-            NEON_X_UA.lua
-        </div>
+                <button class="tab" onclick="switchTab(this, 'aim')">
+                    AIM
+                </button>
 
-        <pre><code id="script">--========================================================
+                <button class="tab" onclick="switchTab(this, 'visuals')">
+                    VISUALS
+                </button>
+
+                <button class="tab" onclick="switchTab(this, 'settings')">
+                    SETTINGS
+                </button>
+
+            </aside>
+
+            <main class="main">
+
+                <div id="pageHeader" class="page-header">
+                    <h1 id="pageTitle" class="page-title">
+                        ESP
+                    </h1>
+
+                    <div id="pageDescription" class="page-description">
+                        Player visualization • Бункер Зели
+                    </div>
+                </div>
+
+                <div class="editor-wrap">
+
+                    <div class="editor-top">
+
+                        <div class="file-name">
+                            NeonX_UA.lua
+                        </div>
+
+                        <div class="status">
+                            LOADED
+                        </div>
+
+                    </div>
+
+                    <textarea id="scriptCode" spellcheck="false">--========================================================
 -- 🇺🇦 Бункер Зели // UA EDITION
 -- ESP + AIM + FOV + KEYBIND + VISUALS + FPS
 -- LocalScript -> StarterPlayer > StarterPlayerScripts
@@ -156,13 +430,12 @@ local PlayerGui = LP:WaitForChild("PlayerGui")
 --========================================================
 
 local oldGui = PlayerGui:FindFirstChild("NeonX_UA")
-
 if oldGui then
-    oldGui:Destroy()
+	oldGui:Destroy()
 end
 
 pcall(function()
-    RunService:UnbindFromRenderStep("NEON_X_AIM")
+	RunService:UnbindFromRenderStep("NEON_X_AIM")
 end)
 
 --========================================================
@@ -200,6 +473,26 @@ local FPS_ENABLED = true
 
 local waitingForAimKey = false
 
+local ESP_COLORS = {
+	{"Blue", Color3.fromRGB(45, 130, 255)},
+	{"Yellow", Color3.fromRGB(255, 215, 55)},
+	{"Cyan", Color3.fromRGB(65, 220, 255)},
+	{"Green", Color3.fromRGB(70, 255, 150)},
+	{"Red", Color3.fromRGB(255, 80, 80)},
+	{"Purple", Color3.fromRGB(180, 100, 255)},
+	{"White", Color3.fromRGB(255, 255, 255)}
+}
+
+local ESP_COLOR_INDEX = 1
+
+local function getESPColor()
+	return ESP_COLORS[ESP_COLOR_INDEX][2]
+end
+
+local function getESPColorName()
+	return ESP_COLORS[ESP_COLOR_INDEX][1]
+end
+
 --========================================================
 -- GUI
 --========================================================
@@ -212,7 +505,40 @@ gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.Parent = PlayerGui
 
 --========================================================
--- FPS DISPLAY
+-- HELPERS
+--========================================================
+
+local function corner(object, radius)
+	local c = Instance.new("UICorner")
+	c.CornerRadius = UDim.new(0, radius)
+	c.Parent = object
+end
+
+local function outline(object, color, thickness, transparency)
+	local s = Instance.new("UIStroke")
+	s.Color = color
+	s.Thickness = thickness or 1
+	s.Transparency = transparency or 0
+	s.Parent = object
+	return s
+end
+
+local function makeLabel(parent, text, size, position)
+	local label = Instance.new("TextLabel")
+	label.BackgroundTransparency = 1
+	label.Text = text
+	label.TextColor3 = TEXT
+	label.Font = Enum.Font.GothamBold
+	label.TextSize = size
+	label.Position = position
+	label.Size = UDim2.new(1, -20, 0, 25)
+	label.TextXAlignment = Enum.TextXAlignment.Left
+	label.Parent = parent
+	return label
+end
+
+--========================================================
+-- FPS
 --========================================================
 
 local fpsFrame = Instance.new("Frame")
@@ -222,10 +548,24 @@ fpsFrame.Position = UDim2.new(1, -145, 0, 18)
 fpsFrame.BackgroundColor3 = PANEL
 fpsFrame.BorderSizePixel = 0
 fpsFrame.ZIndex = 100
+fpsFrame.Visible = true
 fpsFrame.Parent = gui
 
+corner(fpsFrame, 12)
+outline(fpsFrame, BLUE, 1, 0.35)
+
+local fpsBar = Instance.new("Frame")
+fpsBar.Size = UDim2.fromOffset(4, 22)
+fpsBar.Position = UDim2.fromOffset(10, 8)
+fpsBar.BackgroundColor3 = YELLOW
+fpsBar.BorderSizePixel = 0
+fpsBar.Parent = fpsFrame
+
+corner(fpsBar, 4)
+
 local fpsText = Instance.new("TextLabel")
-fpsText.Size = UDim2.fromScale(1, 1)
+fpsText.Size = UDim2.new(1, -25, 1, 0)
+fpsText.Position = UDim2.fromOffset(20, 0)
 fpsText.BackgroundTransparency = 1
 fpsText.Text = "FPS  60"
 fpsText.TextColor3 = TEXT
@@ -235,6 +575,29 @@ fpsText.Parent = fpsFrame
 
 local frames = 0
 local fpsTimer = 0
+local currentFPS = 60
+
+--========================================================
+-- FOV
+--========================================================
+
+local fov = Instance.new("Frame")
+fov.Name = "FOV"
+fov.AnchorPoint = Vector2.new(0.5, 0.5)
+fov.Position = UDim2.fromScale(0.5, 0.5)
+fov.Size = UDim2.fromOffset(AIM_FOV * 2, AIM_FOV * 2)
+fov.BackgroundTransparency = 1
+fov.Visible = true
+fov.ZIndex = 2
+fov.Parent = gui
+
+corner(fov, 999)
+
+local fovStroke = Instance.new("UIStroke")
+fovStroke.Color = BLUE
+fovStroke.Thickness = 2
+fovStroke.Transparency = 0.15
+fovStroke.Parent = fov
 
 --========================================================
 -- MAIN WINDOW
@@ -247,80 +610,305 @@ main.Position = UDim2.new(0.5, -425, 0.5, -262)
 main.BackgroundColor3 = BG
 main.BorderSizePixel = 0
 main.Active = true
+main.ZIndex = 10
 main.Parent = gui
 
-local title = Instance.new("TextLabel")
-title.Position = UDim2.fromOffset(25, 20)
-title.Size = UDim2.fromOffset(500, 40)
-title.BackgroundTransparency = 1
-title.Text = "🇺🇦 Бункер Зели"
-title.TextColor3 = TEXT
-title.Font = Enum.Font.GothamBlack
-title.TextSize = 25
-title.TextXAlignment = Enum.TextXAlignment.Left
-title.Parent = main
-
-local info = Instance.new("TextLabel")
-info.Position = UDim2.fromOffset(27, 62)
-info.Size = UDim2.fromOffset(500, 25)
-info.BackgroundTransparency = 1
-info.Text = "DEVELOPER CONSOLE • Z TO TOGGLE"
-info.TextColor3 = MUTED
-info.Font = Enum.Font.Gotham
-info.TextSize = 11
-info.TextXAlignment = Enum.TextXAlignment.Left
-info.Parent = main
+corner(main, 20)
+outline(main, BLUE, 1, 0.35)
 
 --========================================================
--- SIMPLE MENU
+-- DRAG SYSTEM
 --========================================================
 
-local function makeButton(text, y)
-    local button = Instance.new("TextButton")
+local dragging = false
+local dragStart
+local startPosition
 
-    button.Size = UDim2.fromOffset(200, 50)
-    button.Position = UDim2.fromOffset(25, y)
+local function updateDrag(input)
+	local delta = input.Position - dragStart
 
-    button.BackgroundColor3 = PANEL
-    button.BorderSizePixel = 0
-
-    button.Text = text
-    button.TextColor3 = TEXT
-    button.Font = Enum.Font.GothamBold
-    button.TextSize = 13
-
-    button.Parent = main
-
-    return button
+	main.Position = UDim2.new(
+		startPosition.X.Scale,
+		startPosition.X.Offset + delta.X,
+		startPosition.Y.Scale,
+		startPosition.Y.Offset + delta.Y
+	)
 end
 
-local espButton = makeButton("ESP: OFF", 120)
-local aimButton = makeButton("AIM ASSIST: OFF", 180)
-local fovButton = makeButton("FOV: ON", 240)
-local fpsButton = makeButton("FPS: ON", 300)
+main.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		dragStart = input.Position
+		startPosition = main.Position
+
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+
+UIS.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		updateDrag(input)
+	end
+end)
 
 --========================================================
--- FOV
+-- HEADER
 --========================================================
 
-local fov = Instance.new("Frame")
+local logo = Instance.new("TextLabel")
+logo.Position = UDim2.fromOffset(28, 13)
+logo.Size = UDim2.fromOffset(190, 35)
+logo.BackgroundTransparency = 1
+logo.Text = "🇺🇦  Бункер Зели"
+logo.TextColor3 = TEXT
+logo.Font = Enum.Font.GothamBlack
+logo.TextSize = 24
+logo.TextXAlignment = Enum.TextXAlignment.Left
+logo.Parent = main
 
-fov.AnchorPoint = Vector2.new(0.5, 0.5)
-fov.Position = UDim2.fromScale(0.5, 0.5)
-fov.Size = UDim2.fromOffset(440, 440)
+local badge = Instance.new("TextLabel")
+badge.Position = UDim2.fromOffset(225, 18)
+badge.Size = UDim2.fromOffset(115, 25)
+badge.BackgroundColor3 = BLUE
+badge.Text = "UA EDITION"
+badge.TextColor3 = Color3.new(1, 1, 1)
+badge.Font = Enum.Font.GothamBold
+badge.TextSize = 10
+badge.Parent = main
 
-fov.BackgroundTransparency = 1
-fov.Visible = true
-fov.Parent = gui
+corner(badge, 8)
 
-local stroke = Instance.new("UIStroke")
-stroke.Color = BLUE
-stroke.Thickness = 2
-stroke.Parent = fov
+local sub = Instance.new("TextLabel")
+sub.Position = UDim2.fromOffset(30, 45)
+sub.Size = UDim2.fromOffset(500, 20)
+sub.BackgroundTransparency = 1
+sub.Text = "DEVELOPER CONSOLE  •  Z TO TOGGLE"
+sub.TextColor3 = MUTED
+sub.Font = Enum.Font.Gotham
+sub.TextSize = 11
+sub.TextXAlignment = Enum.TextXAlignment.Left
+sub.Parent = main
 
-local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(1, 0)
-corner.Parent = fov
+local line = Instance.new("Frame")
+line.Position = UDim2.fromOffset(20, 70)
+line.Size = UDim2.new(1, -40, 0, 2)
+line.BackgroundColor3 = BLUE
+line.BorderSizePixel = 0
+line.Parent = main
+
+local yellowLine = Instance.new("Frame")
+yellowLine.Position = UDim2.fromOffset(20, 70)
+yellowLine.Size = UDim2.fromOffset(100, 2)
+yellowLine.BackgroundColor3 = YELLOW
+yellowLine.BorderSizePixel = 0
+yellowLine.Parent = main
+
+--========================================================
+-- SIDEBAR
+--========================================================
+
+local sidebar = Instance.new("Frame")
+sidebar.Position = UDim2.fromOffset(16, 88)
+sidebar.Size = UDim2.fromOffset(195, 420)
+sidebar.BackgroundColor3 = PANEL
+sidebar.BorderSizePixel = 0
+sidebar.Parent = main
+
+corner(sidebar, 15)
+outline(sidebar, Color3.fromRGB(40, 50, 70), 1, 0.35)
+
+local sideTitle = Instance.new("TextLabel")
+sideTitle.Position = UDim2.fromOffset(15, 12)
+sideTitle.Size = UDim2.new(1, -30, 0, 22)
+sideTitle.BackgroundTransparency = 1
+sideTitle.Text = "CONTROL CENTER"
+sideTitle.TextColor3 = MUTED
+sideTitle.Font = Enum.Font.GothamBold
+sideTitle.TextSize = 10
+sideTitle.TextXAlignment = Enum.TextXAlignment.Left
+sideTitle.Parent = sidebar
+
+--========================================================
+-- PAGE
+--========================================================
+
+local page = Instance.new("Frame")
+page.Position = UDim2.fromOffset(230, 88)
+page.Size = UDim2.new(1, -246, 1, -105)
+page.BackgroundTransparency = 1
+page.Parent = main
+
+local function clearPage()
+	for _, object in ipairs(page:GetChildren()) do
+		object:Destroy()
+	end
+end
+
+local function header(title, description)
+	local t = Instance.new("TextLabel")
+	t.Position = UDim2.fromOffset(10, 5)
+	t.Size = UDim2.new(1, -20, 0, 32)
+	t.BackgroundTransparency = 1
+	t.Text = title
+	t.TextColor3 = TEXT
+	t.Font = Enum.Font.GothamBlack
+	t.TextSize = 23
+	t.TextXAlignment = Enum.TextXAlignment.Left
+	t.Parent = page
+
+	local d = Instance.new("TextLabel")
+	d.Position = UDim2.fromOffset(12, 37)
+	d.Size = UDim2.new(1, -20, 0, 22)
+	d.BackgroundTransparency = 1
+	d.Text = description
+	d.TextColor3 = MUTED
+	d.Font = Enum.Font.Gotham
+	d.TextSize = 11
+	d.TextXAlignment = Enum.TextXAlignment.Left
+	d.Parent = page
+end
+
+--========================================================
+-- TAB SYSTEM
+--========================================================
+
+local activeTab = nil
+
+local function createTab(text, y, callback)
+	local button = Instance.new("TextButton")
+	button.Size = UDim2.new(1, -20, 0, 52)
+	button.Position = UDim2.fromOffset(10, y)
+	button.BackgroundColor3 = PANEL
+	button.BorderSizePixel = 0
+	button.Text = "   " .. text
+	button.TextColor3 = MUTED
+	button.Font = Enum.Font.GothamBold
+	button.TextSize = 12
+	button.TextXAlignment = Enum.TextXAlignment.Left
+	button.AutoButtonColor = false
+	button.Parent = sidebar
+
+	corner(button, 10)
+
+	local indicator = Instance.new("Frame")
+	indicator.Size = UDim2.fromOffset(3, 26)
+	indicator.Position = UDim2.fromOffset(4, 13)
+	indicator.BackgroundColor3 = YELLOW
+	indicator.BorderSizePixel = 0
+	indicator.Visible = false
+	indicator.Parent = button
+	indicator.Name = "Indicator"
+
+	corner(indicator, 3)
+
+	button.MouseEnter:Connect(function()
+		if activeTab ~= button then
+			button.BackgroundColor3 = HOVER
+			button.TextColor3 = TEXT
+		end
+	end)
+
+	button.MouseLeave:Connect(function()
+		if activeTab ~= button then
+			button.BackgroundColor3 = PANEL
+			button.TextColor3 = MUTED
+		end
+	end)
+
+	button.MouseButton1Click:Connect(function()
+		if activeTab then
+			activeTab.BackgroundColor3 = PANEL
+			activeTab.TextColor3 = MUTED
+
+			local oldIndicator = activeTab:FindFirstChild("Indicator")
+
+			if oldIndicator then
+				oldIndicator.Visible = false
+			end
+		end
+
+		activeTab = button
+		button.BackgroundColor3 = BLUE_DARK
+		button.TextColor3 = TEXT
+		indicator.Visible = true
+
+		callback()
+	end)
+
+	return button
+end
+
+--========================================================
+-- TOGGLE CARD
+--========================================================
+
+local function toggleCard(parent, y, title, description, state, callback)
+	local card = Instance.new("Frame")
+	card.Size = UDim2.new(1, -20, 0, 72)
+	card.Position = UDim2.fromOffset(10, y)
+	card.BackgroundColor3 = CARD
+	card.BorderSizePixel = 0
+	card.Parent = parent
+
+	corner(card, 12)
+	outline(card, Color3.fromRGB(40, 50, 70), 1, 0.65)
+
+	local titleLabel = Instance.new("TextLabel")
+	titleLabel.Position = UDim2.fromOffset(15, 10)
+	titleLabel.Size = UDim2.new(1, -110, 0, 22)
+	titleLabel.BackgroundTransparency = 1
+	titleLabel.Text = title
+	titleLabel.TextColor3 = TEXT
+	titleLabel.Font = Enum.Font.GothamBold
+	titleLabel.TextSize = 13
+	titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+	titleLabel.Parent = card
+
+	local descLabel = Instance.new("TextLabel")
+	descLabel.Position = UDim2.fromOffset(15, 36)
+	descLabel.Size = UDim2.new(1, -110, 0, 20)
+	descLabel.BackgroundTransparency = 1
+	descLabel.Text = description
+	descLabel.TextColor3 = MUTED
+	descLabel.Font = Enum.Font.Gotham
+	descLabel.TextSize = 10
+	descLabel.TextXAlignment = Enum.TextXAlignment.Left
+	descLabel.Parent = card
+
+	local button = Instance.new("TextButton")
+	button.Size = UDim2.fromOffset(62, 30)
+	button.Position = UDim2.new(1, -77, 0.5, -15)
+	button.BorderSizePixel = 0
+	button.TextColor3 = Color3.new(1, 1, 1)
+	button.Font = Enum.Font.GothamBold
+	button.TextSize = 10
+	button.AutoButtonColor = false
+	button.Parent = card
+
+	corner(button, 15)
+
+	local function refresh()
+		button.Text = state and "ON" or "OFF"
+
+		if state then
+			button.BackgroundColor3 = BLUE
+		else
+			button.BackgroundColor3 = Color3.fromRGB(55, 60, 75)
+		end
+	end
+
+	refresh()
+
+	button.MouseButton1Click:Connect(function()
+		state = not state
+		refresh()
+		callback(state)
+	end)
+end
 
 --========================================================
 -- ESP
@@ -329,283 +917,906 @@ corner.Parent = fov
 local espObjects = {}
 
 local function removeESP(player)
+	local object = espObjects[player]
 
-    if espObjects[player] then
-        espObjects[player]:Destroy()
-        espObjects[player] = nil
-    end
-
+	if object then
+		object:Destroy()
+		espObjects[player] = nil
+	end
 end
 
 local function addESP(player)
+	if player == LP then
+		return
+	end
 
-    if player == LP then
-        return
-    end
+	if not ESP_ENABLED then
+		return
+	end
 
-    if not ESP_ENABLED then
-        return
-    end
+	local character = player.Character
 
-    local character = player.Character
+	if not character then
+		return
+	end
 
-    if not character then
-        return
-    end
+	removeESP(player)
 
-    removeESP(player)
+	local highlight = Instance.new("Highlight")
+	highlight.Name = "NEON_ESP"
+	highlight.Adornee = character
+	highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+	highlight.FillColor = getESPColor()
+	highlight.OutlineColor = YELLOW
+	highlight.FillTransparency = 0.45
+	highlight.OutlineTransparency = 0.05
+	highlight.Parent = character
 
-    local highlight = Instance.new("Highlight")
-
-    highlight.Name = "NEON_ESP"
-    highlight.Adornee = character
-    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-    highlight.FillColor = BLUE
-    highlight.OutlineColor = YELLOW
-    highlight.FillTransparency = 0.45
-    highlight.OutlineTransparency = 0
-
-    highlight.Parent = character
-
-    espObjects[player] = highlight
+	espObjects[player] = highlight
 end
 
 local function refreshESP()
-
-    for _, player in ipairs(Players:GetPlayers()) do
-
-        if player ~= LP then
-
-            if ESP_ENABLED then
-                addESP(player)
-            else
-                removeESP(player)
-            end
-
-        end
-
-    end
-
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player ~= LP then
+			if ESP_ENABLED then
+				addESP(player)
+			else
+				removeESP(player)
+			end
+		end
+	end
 end
 
 --========================================================
--- AIM TARGET
+-- VISUALS
 --========================================================
 
-local function getTarget()
+local visualObjects = {}
 
-    local camera = workspace.CurrentCamera
+local function clearVisuals(player)
+	local objects = visualObjects[player]
 
-    if not camera then
-        return nil
-    end
+	if objects then
+		for _, object in ipairs(objects) do
+			if object then
+				object:Destroy()
+			end
+		end
+	end
 
-    local center = Vector2.new(
-        camera.ViewportSize.X / 2,
-        camera.ViewportSize.Y / 2
-    )
+	visualObjects[player] = nil
+end
 
-    local bestTarget = nil
-    local bestDistance = 220
+local function addVisuals(player)
+	if player == LP then
+		return
+	end
 
-    for _, player in ipairs(Players:GetPlayers()) do
+	clearVisuals(player)
 
-        if player ~= LP then
+	if not player.Character then
+		return
+	end
 
-            local character = player.Character
+	local head = player.Character:FindFirstChild("Head")
 
-            if character then
+	if not head then
+		return
+	end
 
-                local humanoid =
-                    character:FindFirstChildOfClass("Humanoid")
+	visualObjects[player] = {}
 
-                local head =
-                    character:FindFirstChild("Head")
+	if HEAD_DOT then
+		local billboard = Instance.new("BillboardGui")
+		billboard.Size = UDim2.fromOffset(16, 16)
+		billboard.StudsOffset = Vector3.new(0, 2.4, 0)
+		billboard.AlwaysOnTop = true
+		billboard.Adornee = head
+		billboard.Parent = gui
 
-                if humanoid and head and humanoid.Health > 0 then
+		local dot = Instance.new("Frame")
+		dot.Size = UDim2.fromScale(1, 1)
+		dot.BackgroundColor3 = YELLOW
+		dot.BorderSizePixel = 0
+		dot.Parent = billboard
 
-                    local position, visible =
-                        camera:WorldToViewportPoint(head.Position)
+		corner(dot, 99)
 
-                    if visible and position.Z > 0 then
+		table.insert(visualObjects[player], billboard)
+	end
 
-                        local point = Vector2.new(
-                            position.X,
-                            position.Y
-                        )
+	if HEAD_RING then
+		local billboard = Instance.new("BillboardGui")
+		billboard.Size = UDim2.fromOffset(42, 42)
+		billboard.AlwaysOnTop = true
+		billboard.Adornee = head
+		billboard.Parent = gui
 
-                        local distance =
-                            (point - center).Magnitude
+		local ring = Instance.new("Frame")
+		ring.Size = UDim2.fromScale(1, 1)
+		ring.BackgroundTransparency = 1
+		ring.Parent = billboard
 
-                        if distance < bestDistance then
+		corner(ring, 99)
+		outline(ring, BLUE, 2, 0)
 
-                            bestDistance = distance
-                            bestTarget = head
+		table.insert(visualObjects[player], billboard)
+	end
 
-                        end
+	if PLAYER_NAME then
+		local billboard = Instance.new("BillboardGui")
+		billboard.Size = UDim2.fromOffset(220, 25)
+		billboard.StudsOffset = Vector3.new(0, 3.2, 0)
+		billboard.AlwaysOnTop = true
+		billboard.Adornee = head
+		billboard.Parent = gui
 
-                    end
+		local nameLabel = Instance.new("TextLabel")
+		nameLabel.Size = UDim2.fromScale(1, 1)
+		nameLabel.BackgroundTransparency = 1
+		nameLabel.Text = player.DisplayName
+		nameLabel.TextColor3 = YELLOW
+		nameLabel.TextStrokeTransparency = 0.2
+		nameLabel.Font = Enum.Font.GothamBold
+		nameLabel.TextSize = 13
+		nameLabel.Parent = billboard
 
-                end
+		table.insert(visualObjects[player], billboard)
+	end
 
-            end
+	if DISTANCE_TEXT then
+		local billboard = Instance.new("BillboardGui")
+		billboard.Name = "DistanceGui"
+		billboard.Size = UDim2.fromOffset(220, 22)
+		billboard.StudsOffset = Vector3.new(0, -3, 0)
+		billboard.AlwaysOnTop = true
+		billboard.Adornee = head
+		billboard.Parent = gui
 
-        end
+		local distanceLabel = Instance.new("TextLabel")
+		distanceLabel.Name = "Distance"
+		distanceLabel.Size = UDim2.fromScale(1, 1)
+		distanceLabel.BackgroundTransparency = 1
+		distanceLabel.Text = "0 studs"
+		distanceLabel.TextColor3 = Color3.fromRGB(220, 225, 235)
+		distanceLabel.Font = Enum.Font.Gotham
+		distanceLabel.TextSize = 11
+		distanceLabel.Parent = billboard
 
-    end
+		table.insert(visualObjects[player], billboard)
+	end
+end
 
-    return bestTarget
+local function refreshVisuals()
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player ~= LP then
+			addVisuals(player)
+		end
+	end
+end
+
+--========================================================
+-- TRACERS
+--========================================================
+
+local tracerObjects = {}
+
+local function removeTracer(player)
+	local line = tracerObjects[player]
+
+	if line then
+		line:Destroy()
+		tracerObjects[player] = nil
+	end
+end
+
+local function refreshTracers()
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player == LP then
+			removeTracer(player)
+
+		elseif TRACERS then
+			if not tracerObjects[player] then
+				local line = Instance.new("Frame")
+				line.Name = "Tracer"
+				line.AnchorPoint = Vector2.new(0.5, 0.5)
+				line.Size = UDim2.fromOffset(2, 10)
+				line.BackgroundColor3 = getESPColor()
+				line.BorderSizePixel = 0
+				line.ZIndex = 3
+				line.Parent = gui
+
+				tracerObjects[player] = line
+			end
+
+		else
+			removeTracer(player)
+		end
+	end
 end
 
 --========================================================
 -- AIM
 --========================================================
 
+local function getTarget()
+	local camera = workspace.CurrentCamera
+
+	if not camera then
+		return nil
+	end
+
+	local center = Vector2.new(
+		camera.ViewportSize.X / 2,
+		camera.ViewportSize.Y / 2
+	)
+
+	local bestTarget = nil
+	local bestDistance = AIM_FOV
+
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player ~= LP then
+			local character = player.Character
+
+			if character then
+				local humanoid = character:FindFirstChildOfClass("Humanoid")
+				local head = character:FindFirstChild("Head")
+
+				if humanoid
+					and head
+					and humanoid.Health > 0
+				then
+					local screenPosition, visible =
+						camera:WorldToViewportPoint(head.Position)
+
+					if visible and screenPosition.Z > 0 then
+						local point = Vector2.new(
+							screenPosition.X,
+							screenPosition.Y
+						)
+
+						local distance =
+							(point - center).Magnitude
+
+						if distance < bestDistance then
+							bestDistance = distance
+							bestTarget = head
+						end
+					end
+				end
+			end
+		end
+	end
+
+	return bestTarget
+end
+
+pcall(function()
+	RunService:UnbindFromRenderStep("NEON_X_AIM")
+end)
+
 RunService:BindToRenderStep(
-    "NEON_X_AIM",
-    Enum.RenderPriority.Camera.Value + 1,
-    function()
+	"NEON_X_AIM",
+	Enum.RenderPriority.Camera.Value + 1,
+	function()
+		if not AIM_ENABLED then
+			return
+		end
 
-        if not AIM_ENABLED then
-            return
-        end
+		local camera = workspace.CurrentCamera
 
-        local camera = workspace.CurrentCamera
+		if not camera then
+			return
+		end
 
-        if not camera then
-            return
-        end
+		local target = getTarget()
 
-        local target = getTarget()
+		if target then
+			local look = CFrame.lookAt(
+				camera.CFrame.Position,
+				target.Position
+			)
 
-        if target then
-
-            local look =
-                CFrame.lookAt(
-                    camera.CFrame.Position,
-                    target.Position
-                )
-
-            camera.CFrame =
-                camera.CFrame:Lerp(
-                    look,
-                    AIM_SMOOTH
-                )
-
-        end
-
-    end
+			camera.CFrame = camera.CFrame:Lerp(
+				look,
+				AIM_SMOOTH
+			)
+		end
+	end
 )
 
 --========================================================
--- BUTTONS
+-- ESP PAGE
 --========================================================
 
-espButton.MouseButton1Click:Connect(function()
+local function showESP()
+	clearPage()
 
-    ESP_ENABLED = not ESP_ENABLED
+	header(
+		"ESP",
+		"Player visualization • Бункер Зели"
+	)
 
-    espButton.Text =
-        "ESP: " .. (ESP_ENABLED and "ON" or "OFF")
+	toggleCard(
+		page,
+		70,
+		"Player ESP",
+		"Highlight every player.",
+		ESP_ENABLED,
+		function(value)
+			ESP_ENABLED = value
+			refreshESP()
+		end
+	)
 
-    refreshESP()
+	local colorButton = Instance.new("TextButton")
+	colorButton.Size = UDim2.new(1, -20, 0, 55)
+	colorButton.Position = UDim2.fromOffset(10, 152)
+	colorButton.BackgroundColor3 = getESPColor()
+	colorButton.Text =
+		"ESP COLOR  •  " .. getESPColorName()
+	colorButton.TextColor3 = Color3.new(1, 1, 1)
+	colorButton.Font = Enum.Font.GothamBold
+	colorButton.TextSize = 12
+	colorButton.BorderSizePixel = 0
+	colorButton.Parent = page
 
-end)
+	corner(colorButton, 11)
 
-aimButton.MouseButton1Click:Connect(function()
+	colorButton.MouseButton1Click:Connect(function()
+		ESP_COLOR_INDEX += 1
 
-    AIM_ENABLED = not AIM_ENABLED
+		if ESP_COLOR_INDEX > #ESP_COLORS then
+			ESP_COLOR_INDEX = 1
+		end
 
-    aimButton.Text =
-        "AIM ASSIST: " ..
-        (AIM_ENABLED and "ON" or "OFF")
+		colorButton.Text =
+			"ESP COLOR  •  " .. getESPColorName()
 
-end)
+		colorButton.BackgroundColor3 = getESPColor()
 
-fovButton.MouseButton1Click:Connect(function()
-
-    FOV_ENABLED = not FOV_ENABLED
-
-    fov.Visible = FOV_ENABLED
-
-    fovButton.Text =
-        "FOV: " ..
-        (FOV_ENABLED and "ON" or "OFF")
-
-end)
-
-fpsButton.MouseButton1Click:Connect(function()
-
-    FPS_ENABLED = not FPS_ENABLED
-
-    fpsFrame.Visible = FPS_ENABLED
-
-    fpsButton.Text =
-        "FPS: " ..
-        (FPS_ENABLED and "ON" or "OFF")
-
-end)
+		refreshESP()
+		refreshVisuals()
+		refreshTracers()
+	end)
+end
 
 --========================================================
--- Z TO TOGGLE MENU
+-- AIM PAGE
+--========================================================
+
+local function showAIM()
+	clearPage()
+
+	header(
+		"AIM",
+		"Aim assistance • FOV • keyboard bind"
+	)
+
+	toggleCard(
+		page,
+		70,
+		"Aim Assist",
+		"Toggle with your chosen key.",
+		AIM_ENABLED,
+		function(value)
+			AIM_ENABLED = value
+		end
+	)
+
+	toggleCard(
+		page,
+		152,
+		"FOV Circle",
+		"Show the aiming radius.",
+		FOV_ENABLED,
+		function(value)
+			FOV_ENABLED = value
+			fov.Visible = value
+		end
+	)
+
+	local minus = Instance.new("TextButton")
+	minus.Size = UDim2.fromOffset(70, 45)
+	minus.Position = UDim2.fromOffset(10, 234)
+	minus.BackgroundColor3 = CARD
+	minus.Text = "-"
+	minus.TextColor3 = TEXT
+	minus.TextSize = 22
+	minus.Font = Enum.Font.GothamBold
+	minus.BorderSizePixel = 0
+	minus.Parent = page
+
+	corner(minus, 10)
+
+	local fovText = Instance.new("TextLabel")
+	fovText.Size = UDim2.new(1, -180, 0, 45)
+	fovText.Position = UDim2.fromOffset(90, 234)
+	fovText.BackgroundColor3 = CARD
+	fovText.Text = "FOV  " .. AIM_FOV
+	fovText.TextColor3 = TEXT
+	fovText.Font = Enum.Font.GothamBold
+	fovText.TextSize = 13
+	fovText.BorderSizePixel = 0
+	fovText.Parent = page
+
+	corner(fovText, 10)
+
+	local plus = Instance.new("TextButton")
+	plus.Size = UDim2.fromOffset(70, 45)
+	plus.Position = UDim2.new(1, -80, 0, 234)
+	plus.BackgroundColor3 = BLUE
+	plus.Text = "+"
+	plus.TextColor3 = Color3.new(1, 1, 1)
+	plus.TextSize = 22
+	plus.Font = Enum.Font.GothamBold
+	plus.BorderSizePixel = 0
+	plus.Parent = page
+
+	corner(plus, 10)
+
+	local function updateFOV()
+		fov.Size =
+			UDim2.fromOffset(
+				AIM_FOV * 2,
+				AIM_FOV * 2
+			)
+
+		fovText.Text = "FOV  " .. AIM_FOV
+	end
+
+	minus.MouseButton1Click:Connect(function()
+		AIM_FOV = math.max(50, AIM_FOV - 25)
+		updateFOV()
+	end)
+
+	plus.MouseButton1Click:Connect(function()
+		AIM_FOV = math.min(500, AIM_FOV + 25)
+		updateFOV()
+	end)
+
+	local bind = Instance.new("TextButton")
+	bind.Size = UDim2.new(1, -20, 0, 50)
+	bind.Position = UDim2.fromOffset(10, 294)
+	bind.BackgroundColor3 = BLUE
+
+	bind.Text =
+		waitingForAimKey
+		and "PRESS A KEY..."
+		or "AIM KEY  •  " .. AIM_KEY.Name
+
+	bind.TextColor3 = Color3.new(1, 1, 1)
+	bind.Font = Enum.Font.GothamBold
+	bind.TextSize = 12
+	bind.BorderSizePixel = 0
+	bind.Parent = page
+
+	corner(bind, 10)
+
+	bind.MouseButton1Click:Connect(function()
+		waitingForAimKey = true
+		bind.Text = "PRESS A KEY..."
+	end)
+end
+
+--========================================================
+-- VISUALS PAGE
+--========================================================
+
+local function showVisuals()
+	clearPage()
+
+	header(
+		"VISUALS",
+		"Clean player indicators"
+	)
+
+	local scroll = Instance.new("ScrollingFrame")
+	scroll.Position = UDim2.fromOffset(5, 65)
+	scroll.Size = UDim2.new(1, -10, 1, -70)
+	scroll.BackgroundTransparency = 1
+	scroll.BorderSizePixel = 0
+	scroll.ScrollBarThickness = 5
+	scroll.ScrollBarImageColor3 = BLUE
+	scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	scroll.Parent = page
+
+	local layout = Instance.new("UIListLayout")
+	layout.Padding = UDim.new(0, 10)
+	layout.SortOrder = Enum.SortOrder.LayoutOrder
+	layout.Parent = scroll
+
+	local padding = Instance.new("UIPadding")
+	padding.PaddingLeft = UDim.new(0, 5)
+	padding.PaddingRight = UDim.new(0, 5)
+	padding.PaddingBottom = UDim.new(0, 10)
+	padding.Parent = scroll
+
+	local function visualCard(title, description, state, callback)
+		local card = Instance.new("Frame")
+		card.Size = UDim2.new(1, 0, 0, 74)
+		card.BackgroundColor3 = CARD
+		card.BorderSizePixel = 0
+		card.Parent = scroll
+
+		corner(card, 12)
+
+		local titleLabel = Instance.new("TextLabel")
+		titleLabel.Position = UDim2.fromOffset(15, 10)
+		titleLabel.Size = UDim2.new(1, -100, 0, 22)
+		titleLabel.BackgroundTransparency = 1
+		titleLabel.Text = title
+		titleLabel.TextColor3 = TEXT
+		titleLabel.Font = Enum.Font.GothamBold
+		titleLabel.TextSize = 13
+		titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+		titleLabel.Parent = card
+
+		local descLabel = Instance.new("TextLabel")
+		descLabel.Position = UDim2.fromOffset(15, 35)
+		descLabel.Size = UDim2.new(1, -100, 0, 22)
+		descLabel.BackgroundTransparency = 1
+		descLabel.Text = description
+		descLabel.TextColor3 = MUTED
+		descLabel.Font = Enum.Font.Gotham
+		descLabel.TextSize = 10
+		descLabel.TextXAlignment = Enum.TextXAlignment.Left
+		descLabel.Parent = card
+
+		local button = Instance.new("TextButton")
+		button.Size = UDim2.fromOffset(62, 30)
+		button.Position = UDim2.new(1, -77, 0.5, -15)
+		button.BorderSizePixel = 0
+		button.Font = Enum.Font.GothamBold
+		button.TextSize = 10
+		button.TextColor3 = Color3.new(1, 1, 1)
+		button.AutoButtonColor = false
+		button.Parent = card
+
+		corner(button, 15)
+
+		local function refresh()
+			button.Text = state and "ON" or "OFF"
+
+			if state then
+				button.BackgroundColor3 = BLUE
+			else
+				button.BackgroundColor3 =
+					Color3.fromRGB(55, 60, 75)
+			end
+		end
+
+		refresh()
+
+		button.MouseButton1Click:Connect(function()
+			state = not state
+			refresh()
+			callback(state)
+		end)
+	end
+
+	visualCard(
+		"HEAD DOT",
+		"Bright marker above the head.",
+		HEAD_DOT,
+		function(value)
+			HEAD_DOT = value
+			refreshVisuals()
+		end
+	)
+
+	visualCard(
+		"HEAD RING",
+		"Neon ring around the head.",
+		HEAD_RING,
+		function(value)
+			HEAD_RING = value
+			refreshVisuals()
+		end
+	)
+
+	visualCard(
+		"PLAYER NAME",
+		"Display the player's name.",
+		PLAYER_NAME,
+		function(value)
+			PLAYER_NAME = value
+			refreshVisuals()
+		end
+	)
+
+	visualCard(
+		"DISTANCE",
+		"Display distance in studs.",
+		DISTANCE_TEXT,
+		function(value)
+			DISTANCE_TEXT = value
+			refreshVisuals()
+		end
+	)
+
+	visualCard(
+		"TRACERS",
+		"Draw lines from screen center.",
+		TRACERS,
+		function(value)
+			TRACERS = value
+			refreshTracers()
+		end
+	)
+
+	visualCard(
+		"FPS DISPLAY",
+		"Show current FPS.",
+		FPS_ENABLED,
+		function(value)
+			FPS_ENABLED = value
+			fpsFrame.Visible = value
+		end
+	)
+
+	visualCard(
+		"ALL VISUALS",
+		"Toggle visual effects.",
+		HEAD_DOT
+			and HEAD_RING
+			and PLAYER_NAME
+			and DISTANCE_TEXT
+			and TRACERS,
+		function(value)
+			HEAD_DOT = value
+			HEAD_RING = value
+			PLAYER_NAME = value
+			DISTANCE_TEXT = value
+			TRACERS = value
+
+			refreshVisuals()
+			refreshTracers()
+			showVisuals()
+		end
+	)
+end
+
+--========================================================
+-- SETTINGS PAGE
+--========================================================
+
+local function showSettings()
+	clearPage()
+
+	header(
+		"SETTINGS",
+		"Бункер Зели configuration"
+	)
+
+	local reset = Instance.new("TextButton")
+	reset.Size = UDim2.new(1, -20, 0, 55)
+	reset.Position = UDim2.fromOffset(10, 70)
+	reset.BackgroundColor3 = CARD
+	reset.Text = "RESET EVERYTHING"
+	reset.TextColor3 = TEXT
+	reset.Font = Enum.Font.GothamBold
+	reset.TextSize = 13
+	reset.BorderSizePixel = 0
+	reset.Parent = page
+
+	corner(reset, 11)
+
+	reset.MouseButton1Click:Connect(function()
+		ESP_ENABLED = false
+		AIM_ENABLED = false
+		FOV_ENABLED = true
+
+		AIM_FOV = 220
+		AIM_SMOOTH = 0.16
+		AIM_KEY = Enum.KeyCode.Q
+
+		HEAD_DOT = false
+		HEAD_RING = false
+		PLAYER_NAME = false
+		DISTANCE_TEXT = false
+		TRACERS = false
+		FPS_ENABLED = true
+
+		waitingForAimKey = false
+		ESP_COLOR_INDEX = 1
+
+		fov.Visible = true
+		fov.Size = UDim2.fromOffset(440, 440)
+
+		fpsFrame.Visible = true
+
+		refreshESP()
+		refreshVisuals()
+		refreshTracers()
+
+		showSettings()
+	end)
+end
+
+--========================================================
+-- TABS
+--========================================================
+
+createTab("ESP", 42, showESP)
+createTab("AIM", 100, showAIM)
+createTab("VISUALS", 158, showVisuals)
+createTab("SETTINGS", 216, showSettings)
+
+--========================================================
+-- KEYBOARD
 --========================================================
 
 UIS.InputBegan:Connect(function(input, processed)
+	if input.UserInputType ~= Enum.UserInputType.Keyboard then
+		return
+	end
 
-    if processed then
-        return
-    end
+	if waitingForAimKey then
+		if input.KeyCode ~= Enum.KeyCode.Unknown
+			and input.KeyCode ~= Enum.KeyCode.Z
+		then
+			AIM_KEY = input.KeyCode
+			waitingForAimKey = false
+			showAIM()
+		end
 
-    if input.KeyCode == Enum.KeyCode.Z then
+		return
+	end
 
-        main.Visible =
-            not main.Visible
+	if input.KeyCode == AIM_KEY and not processed then
+		AIM_ENABLED = not AIM_ENABLED
+	end
 
-    end
-
+	if input.KeyCode == Enum.KeyCode.Z then
+		main.Visible = not main.Visible
+	end
 end)
 
 --========================================================
--- FPS + FOV UPDATE
+-- RENDER UPDATE
 --========================================================
 
 RunService.RenderStepped:Connect(function(dt)
 
-    if FPS_ENABLED then
+	-- FPS
+	if FPS_ENABLED then
+		frames += 1
+		fpsTimer += dt
 
-        frames += 1
-        fpsTimer += dt
+		if fpsTimer >= 0.5 then
+			currentFPS =
+				math.floor(
+					frames / fpsTimer + 0.5
+				)
 
-        if fpsTimer >= 0.5 then
+			if currentFPS < 0 then
+				currentFPS = 0
+			end
 
-            local fps =
-                math.floor(
-                    frames / fpsTimer + 0.5
-                )
+			fpsText.Text = "FPS  " .. currentFPS
 
-            fpsText.Text =
-                "FPS  " .. fps
+			frames = 0
+			fpsTimer = 0
+		end
+	end
 
-            frames = 0
-            fpsTimer = 0
+	-- FOV position
+	local camera = workspace.CurrentCamera
 
-        end
+	if not camera then
+		return
+	end
 
-    end
+	fov.Position =
+		UDim2.fromOffset(
+			camera.ViewportSize.X / 2,
+			camera.ViewportSize.Y / 2
+		)
 
-    local camera =
-        workspace.CurrentCamera
+	-- Distance
+	if DISTANCE_TEXT then
+		local myCharacter = LP.Character
 
-    if camera then
+		local myRoot =
+			myCharacter
+			and myCharacter:FindFirstChild("HumanoidRootPart")
 
-        fov.Position =
-            UDim2.fromOffset(
-                camera.ViewportSize.X / 2,
-                camera.ViewportSize.Y / 2
-            )
+		if myRoot then
+			for player, objects in pairs(visualObjects) do
+				if player.Character then
+					local head =
+						player.Character:FindFirstChild("Head")
 
-    end
+					if head then
+						local distance =
+							math.floor(
+								(
+									myRoot.Position
+									- head.Position
+								).Magnitude
+							)
 
+						for _, object in ipairs(objects) do
+							local label =
+								object:FindFirstChild("Distance")
+
+							if label then
+								label.Text =
+									distance .. " studs"
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	-- Tracers
+	if TRACERS then
+		local center =
+			Vector2.new(
+				camera.ViewportSize.X / 2,
+				camera.ViewportSize.Y / 2
+			)
+
+		for player, line in pairs(tracerObjects) do
+			local character = player.Character
+
+			if character then
+				local head =
+					character:FindFirstChild("Head")
+
+				if head then
+					local position, visible =
+						camera:WorldToViewportPoint(
+							head.Position
+						)
+
+					if visible and position.Z > 0 then
+						local target =
+							Vector2.new(
+								position.X,
+								position.Y
+							)
+
+						local direction =
+							target - center
+
+						local length =
+							direction.Magnitude
+
+						line.Visible = true
+
+						line.Size =
+							UDim2.fromOffset(
+								2,
+								length
+							)
+
+						line.Position =
+							UDim2.fromOffset(
+								(center.X + target.X) / 2,
+								(center.Y + target.Y) / 2
+							)
+
+						line.Rotation =
+							math.deg(
+								math.atan2(
+									direction.Y,
+									direction.X
+								)
+							) + 90
+
+						line.BackgroundColor3 =
+							getESPColor()
+					else
+						line.Visible = false
+					end
+				end
+			end
+		end
+	end
 end)
 
 --========================================================
@@ -613,76 +1824,186 @@ end)
 --========================================================
 
 local function setupPlayer(player)
+	if player == LP then
+		return
+	end
 
-    if player == LP then
-        return
-    end
+	player.CharacterAdded:Connect(function()
+		task.wait(0.3)
 
-    player.CharacterAdded:Connect(function()
+		if ESP_ENABLED then
+			addESP(player)
+		end
 
-        task.wait(0.3)
+		addVisuals(player)
 
-        if ESP_ENABLED then
-            addESP(player)
-        end
+		if TRACERS then
+			refreshTracers()
+		end
+	end)
 
-    end)
-
+	player.CharacterRemoving:Connect(function()
+		removeESP(player)
+		clearVisuals(player)
+		removeTracer(player)
+	end)
 end
 
 for _, player in ipairs(Players:GetPlayers()) do
-    setupPlayer(player)
+	setupPlayer(player)
 end
 
 Players.PlayerAdded:Connect(setupPlayer)
 
 Players.PlayerRemoving:Connect(function(player)
-
-    removeESP(player)
-
+	removeESP(player)
+	clearVisuals(player)
+	removeTracer(player)
 end)
+
+--========================================================
+-- START
+--========================================================
+
+showESP()
 
 print("================================")
 print("🇺🇦 Бункер Зели // UA EDITION")
 print("LOADED SUCCESSFULLY")
-print("================================")</code></pre>
+print("================================")</textarea>
+
+                </div>
+
+                <div class="footer">
+                    Код отображается внутри страницы. Кнопка COPY SCRIPT копирует его целиком.
+                </div>
+
+            </main>
+
+        </div>
 
     </div>
+
+</div>
+
+<div id="toast" class="toast">
+    Скопировано!
 </div>
 
 <script>
-function getScript() {
-    return document.getElementById("script").textContent;
+
+const pages = {
+    esp: {
+        title: "ESP",
+        description: "Player visualization • Бункер Зели"
+    },
+
+    aim: {
+        title: "AIM",
+        description: "Aim assistance • FOV • keyboard bind"
+    },
+
+    visuals: {
+        title: "VISUALS",
+        description: "Clean player indicators"
+    },
+
+    settings: {
+        title: "SETTINGS",
+        description: "Бункер Зели configuration"
+    }
+};
+
+function switchTab(button, page) {
+
+    document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    document.getElementById("pageTitle").textContent =
+        pages[page].title;
+
+    document.getElementById("pageDescription").textContent =
+        pages[page].description;
+}
+
+function showToast(text) {
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = text;
+    toast.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1500);
 }
 
 function copyScript() {
-    navigator.clipboard.writeText(getScript()).then(function() {
-        document.getElementById("status").textContent =
-            "✓ Script copied!";
+
+    const textarea =
+        document.getElementById("scriptCode");
+
+    textarea.select();
+    textarea.setSelectionRange(
+        0,
+        textarea.value.length
+    );
+
+    navigator.clipboard.writeText(
+        textarea.value
+    ).then(() => {
+
+        showToast("Скрипт скопирован!");
+
+    }).catch(() => {
+
+        document.execCommand("copy");
+
+        showToast("Скрипт скопирован!");
+
     });
 }
 
-function downloadLua() {
-    const blob = new Blob(
-        [getScript()],
-        { type: "text/plain;charset=utf-8" }
-    );
+function downloadScript() {
 
-    const url = URL.createObjectURL(blob);
+    const code =
+        document.getElementById("scriptCode").value;
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "Bunker_Zeli.lua";
+    const blob =
+        new Blob(
+            [code],
+            {
+                type: "text/plain;charset=utf-8"
+            }
+        );
 
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    const url =
+        URL.createObjectURL(blob);
 
-    URL.revokeObjectURL(url);
+    const link =
+        document.createElement("a");
 
-    document.getElementById("status").textContent =
-        "✓ Bunker_Zeli.lua downloaded!";
+    link.href = url;
+    link.download = "NeonX_UA.lua";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    setTimeout(() => {
+        URL.revokeObjectURL(url);
+    }, 1000);
+
+    showToast("NeonX_UA.lua скачан!");
 }
+
 </script>
 
 </body>
