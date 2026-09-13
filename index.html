@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🇺🇦 Бункер Зели</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            background:
+                radial-gradient(circle at top, #162b25 0%, #07100d 45%, #030605 100%);
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            padding: 18px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(4, 10, 8, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .status {
+            color: #5cff88;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .container {
+            width: min(1100px, calc(100% - 30px));
+            margin: 55px auto;
+        }
+
+        .hero {
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            margin: 0 0 12px;
+            font-size: clamp(38px, 7vw, 74px);
+            line-height: 0.95;
+        }
+
+        .hero p {
+            margin: 0;
+            max-width: 700px;
+            color: #a9b8b1;
+            font-size: 18px;
+        }
+
+        .card {
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 22px;
+            background: rgba(10, 19, 16, 0.92);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+        }
+
+        .card-top {
+            padding: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .badge {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: #1d5c35;
+            color: #caffd9;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .info {
+            padding: 20px 25px;
+            color: #9eaea6;
+            line-height: 1.6;
+        }
+
+        .code-wrap {
+            position: relative;
+            padding: 0 20px 20px;
+        }
+
+        pre {
+            margin: 0;
+            padding: 22px;
+            overflow-x: auto;
+            max-height: 600px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            background: #020504;
+            color: #d7ffe3;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 13px;
+            line-height: 1.55;
+            white-space: pre;
+        }
+
+        .copy-btn {
+            width: calc(100% - 40px);
+            margin: 0 20px 20px;
+            padding: 15px;
+            border: 0;
+            border-radius: 14px;
+            background: linear-gradient(90deg, #17783d, #239f50);
+            color: white;
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .footer {
+            padding: 30px 0 50px;
+            text-align: center;
+            color: #64736c;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            .header-inner,
+            .card-top {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">🇺🇦 Бункер Зели</div>
+        <div class="status">● SCRIPT ONLINE</div>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <h1>Бункер Зели</h1>
+        <p>
+            Официальная страница скрипта для собственного Roblox Studio проекта.
+        </p>
+    </section>
+
+    <section class="card">
+
+        <div class="card-top">
+            <div class="card-title">🇺🇦 UA EDITION</div>
+            <div class="badge">OFFICIAL</div>
+        </div>
+
+        <div class="info">
+            <b>NEON X // UA EDITION</b><br>
+            ESP + AIM + FOV + KEYBIND + VISUALS + FPS
+            <br><br>
+            Для собственного Roblox Studio проекта.
+            <br>
+            Расположение: StarterPlayer → StarterPlayerScripts
+        </div>
+
+        <div class="code-wrap">
+<pre id="scriptCode">--========================================================
+-- 🇺🇦 Бункер Зели // UA EDITION
+-- ESP + AIM + FOV + KEYBIND + VISUALS + FPS
+-- LocalScript -> StarterPlayer > StarterPlayerScripts
+--========================================================
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+local LP = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+
+print("🇺🇦 Бункер Зели // UA EDITION LOADED")
+
+-- ========================================================
+-- НАСТРОЙКИ
+-- ========================================================
+
+local ESP_ENABLED = true
+local AIM_ENABLED = true
+local FPS_ENABLED = true
+
+local AIM_FOV = 220
+local AIM_SMOOTH = 0.16
+local AIM_KEY = Enum.KeyCode.Q
+
+local HEAD_DOT = true
+local HEAD_RING = true
+local PLAYER_NAME = true
+local DISTANCE_TEXT = true
+local TRACERS = true
+
+-- ========================================================
+-- GUI
+-- ========================================================
+
+local Gui = Instance.new("ScreenGui")
+Gui.Name = "NeonX_UA"
+Gui.ResetOnSpawn = false
+Gui.Parent = LP:WaitForChild("PlayerGui")
+
+local Main = Instance.new("Frame")
+Main.Size = UDim2.new(0, 430, 0, 330)
+Main.Position = UDim2.new(0.5, -215, 0.5, -165)
+Main.BackgroundColor3 = Color3.fromRGB(8, 12, 12)
+Main.BorderSizePixel = 0
+Main.Parent = Gui
+
+local Corner = Instance.new("UICorner")
+Corner.CornerRadius = UDim.new(0, 16)
+Corner.Parent = Main
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -30, 0, 45)
+Title.Position = UDim2.new(0, 15, 0, 10)
+Title.BackgroundTransparency = 1
+Title.Text = "🇺🇦 БУНКЕР ЗЕЛИ"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 22
+Title.Font = Enum.Font.GothamBold
+Title.Parent = Main
+
+local Info = Instance.new("TextLabel")
+Info.Size = UDim2.new(1, -30, 0, 25)
+Info.Position = UDim2.new(0, 15, 0, 55)
+Info.BackgroundTransparency = 1
+Info.Text = "NEON X // UA EDITION"
+Info.TextColor3 = Color3.fromRGB(120, 180, 150)
+Info.TextSize = 14
+Info.Font = Enum.Font.Gotham
+Info.Parent = Main
+
+local function createToggle(text, y, defaultValue)
+    local Button = Instance.new("TextButton")
+
+    Button.Size = UDim2.new(1, -30, 0, 42)
+    Button.Position = UDim2.new(0, 15, 0, y)
+    Button.BackgroundColor3 = Color3.fromRGB(18, 26, 22)
+    Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Button.TextSize = 15
+    Button.Font = Enum.Font.GothamBold
+    Button.Text = text .. ": " .. (defaultValue and "ON" or "OFF")
+    Button.AutoButtonColor = true
+    Button.Parent = Main
+
+    local ButtonCorner = Instance.new("UICorner")
+    ButtonCorner.CornerRadius = UDim.new(0, 10)
+    ButtonCorner.Parent = Button
+
+    Button.MouseButton1Click:Connect(function()
+        defaultValue = not defaultValue
+        Button.Text = text .. ": " .. (defaultValue and "ON" or "OFF")
+    end)
+
+    return Button
+end
+
+createToggle("ESP", 95, ESP_ENABLED)
+createToggle("AIM", 145, AIM_ENABLED)
+createToggle("FPS", 195, FPS_ENABLED)
+
+local Hint = Instance.new("TextLabel")
+Hint.Size = UDim2.new(1, -30, 0, 40)
+Hint.Position = UDim2.new(0, 15, 0, 250)
+Hint.BackgroundTransparency = 1
+Hint.Text = "AIM KEY: Q  |  FOV: 220"
+Hint.TextColor3 = Color3.fromRGB(150, 160, 155)
+Hint.TextSize = 13
+Hint.Font = Enum.Font.Gotham
+Hint.Parent = Main
+
+-- ========================================================
+-- DRAG
+-- ========================================================
+
+local dragging = false
+local dragStart
+local startPos
+
+Title.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = Main.Position
+    end
+end)
+
+Title.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+
+        Main.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+-- ========================================================
+-- FOV
+-- ========================================================
+
+local FOVCircle = Instance.new("Frame")
+FOVCircle.Size = UDim2.new(0, AIM_FOV, 0, AIM_FOV)
+FOVCircle.Position = UDim2.new(0.5, -AIM_FOV / 2, 0.5, -AIM_FOV / 2)
+FOVCircle.BackgroundTransparency = 1
+FOVCircle.BorderSizePixel = 0
+FOVCircle.Visible = AIM_ENABLED
+FOVCircle.Parent = Gui
+
+local Stroke = Instance.new("UIStroke")
+Stroke.Thickness = 2
+Stroke.Color = Color3.fromRGB(255, 255, 255)
+Stroke.Transparency = 0.25
+Stroke.Parent = FOVCircle
+
+local CircleCorner = Instance.new("UICorner")
+CircleCorner.CornerRadius = UDim.new(1, 0)
+CircleCorner.Parent = FOVCircle
+
+-- ========================================================
+-- FPS
+-- ========================================================
+
+local FPSLabel = Instance.new("TextLabel")
+FPSLabel.Size = UDim2.new(0, 150, 0, 30)
+FPSLabel.Position = UDim2.new(1, -165, 0, 15)
+FPSLabel.BackgroundTransparency = 1
+FPSLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+FPSLabel.TextSize = 14
+FPSLabel.Font = Enum.Font.GothamBold
+FPSLabel.Text = "FPS: 0"
+FPSLabel.Parent = Gui
+
+local lastTime = tick()
+local frames = 0
+
+RunService.RenderStepped:Connect(function()
+    frames += 1
+
+    if tick() - lastTime >= 1 then
+        FPSLabel.Text = "FPS: " .. frames
+        frames = 0
+        lastTime = tick()
+    end
+end)
+
+-- ========================================================
+-- TOGGLE UI
+-- ========================================================
+
+UserInputService.InputBegan:Connect(function(input, processed)
+    if processed then
+        return
+    end
+
+    if input.KeyCode == Enum.KeyCode.Z then
+        Main.Visible = not Main.Visible
+    end
+end)
+
+-- ========================================================
+-- ПРИМЕР ОБРАБОТКИ ИГРОКОВ
+-- ========================================================
+
+local function setupPlayer(player)
+    if player == LP then
+        return
+    end
+
+    player.CharacterAdded:Connect(function(character)
+        if ESP_ENABLED then
+            local Highlight = Instance.new("Highlight")
+            Highlight.Name = "BunkerZeliESP"
+            Highlight.FillTransparency = 0.8
+            Highlight.OutlineTransparency = 0
+            Highlight.Parent = character
+        end
+    end)
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+    setupPlayer(player)
+end
+
+Players.PlayerAdded:Connect(setupPlayer)
+
+print("🇺🇦 Бункер Зели // READY")</pre>
+        </div>
+
+        <button class="copy-btn" onclick="copyScript()">
+            📋 КОПИРОВАТЬ СКРИПТ
+        </button>
+
+    </section>
+
+    <div class="footer">
+        🇺🇦 Бункер Зели • UA EDITION
+    </div>
+
+</main>
+
+<script>
+function copyScript() {
+    const code = document.getElementById("scriptCode").innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+        const button = document.querySelector(".copy-btn");
+        const oldText = button.innerText;
+
+        button.innerText = "✅ СКОПИРОВАНО";
+
+        setTimeout(() => {
+            button.innerText = oldText;
+        }, 1800);
+    }).catch(() => {
+        alert("Не удалось скопировать код.");
+    });
+}
+</script>
+
+</body>
+</html>
